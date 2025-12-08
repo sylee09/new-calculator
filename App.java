@@ -4,7 +4,7 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator();
+        ArithmeticCalculator calculator = new ArithmeticCalculator();
         while (true) {
             int a;
             try {
@@ -20,7 +20,7 @@ public class App {
                 System.out.println("양의 정수를 입력해주세요");
                 continue;
             }
-            char op;
+            OperatorType op;
             try {
                 op = calculator.getOperator(sc);
             } catch (RuntimeException e) {
@@ -33,7 +33,7 @@ public class App {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 continue;
             }
-            System.out.println(a + "" + op + b + "=" + calculator.getList().getLast());
+            System.out.println(a + "" + op.getSign() + b + "=" + calculator.getList().getLast());
             calculator.removeFirstFunction(sc);
             boolean flag = calculator.continueFunction(sc);
             if (flag) {

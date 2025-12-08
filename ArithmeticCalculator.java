@@ -1,9 +1,8 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Calculator {
+public class ArithmeticCalculator {
     private LinkedList<Integer> list = new LinkedList<>();
-
 
     public LinkedList<Integer> getList() {
         return list;
@@ -47,28 +46,38 @@ public class Calculator {
         return a;
     }
 
-    public Character getOperator(Scanner sc) throws RuntimeException {
+    public OperatorType getOperator(Scanner sc) throws RuntimeException {
         System.out.print("사칙연산 기호('+', '-', '*', '/')를 입력해주세요:");
         char op = sc.nextLine().charAt(0);
         if (op != '+' && op != '-' && op != '*' && op != '/') {
             throw new RuntimeException("사칙연산 기호('+', '-', '*', '/')를 입력해주세요");
         }
-        return op;
+        switch (op) {
+            case '+':
+                return OperatorType.PLUS;
+            case '-':
+                return OperatorType.MINUS;
+            case '*':
+                return OperatorType.MULTIPLY;
+            case '/':
+                return OperatorType.DIVIDE;
+        }
+        return null;
     }
 
-    public void calculate(char op, int a, int b) throws ArithmeticException{
+    public void calculate(OperatorType op, int a, int b) throws ArithmeticException{
         int result = 0;
         switch(op) {
-            case '+' :
+            case op.PLUS:
                 result = a + b;
                 break;
-            case '-':
+            case op.MINUS:
                 result = a - b;
                 break;
-            case '*':
+            case op.MULTIPLY:
                 result = a * b;
                 break;
-            case '/':
+            case op.DIVIDE:
                 result = a / b;
                 break;
         }
