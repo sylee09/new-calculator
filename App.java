@@ -5,19 +5,20 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArithmeticCalculator calculator = new ArithmeticCalculator();
+
         while (true) {
-            int a;
+            Number n1;
             try {
-                a = calculator.getInteger(sc);
+                n1 = calculator.getNumber(sc);
             } catch (RuntimeException e) {
-                System.out.println("양의 정수를 입력해주세요");
+                System.out.println("양의 숫자를 입력해주세요");
                 continue;
             }
-            int b;
+            Number n2;
             try {
-                b = calculator.getInteger(sc);
+                n2 = calculator.getNumber(sc);
             } catch (RuntimeException e) {
-                System.out.println("양의 정수를 입력해주세요");
+                System.out.println("양의 숫자를 입력해주세요");
                 continue;
             }
             OperatorType op;
@@ -28,18 +29,17 @@ public class App {
                 continue;
             }
             try {
-                calculator.calculate(op, a, b);
+                calculator.calFunc(op, n1, n2);
             } catch (ArithmeticException e) {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 continue;
             }
-            System.out.println(a + "" + op.getSign() + b + "=" + calculator.getList().getLast());
+            System.out.println(n1 + "" + op.getSign() + n2 + "=" + calculator.getList().getLast());
             calculator.removeFirstFunction(sc);
             boolean flag = calculator.continueFunction(sc);
             if (flag) {
                 break;
             }
         }
-
     }
 }

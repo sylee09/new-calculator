@@ -2,13 +2,13 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ArithmeticCalculator {
-    private LinkedList<Integer> list = new LinkedList<>();
+    private LinkedList<Double> list = new LinkedList<>();
 
-    public LinkedList<Integer> getList() {
+    public LinkedList<Double> getList() {
         return list;
     }
 
-    public void setList(LinkedList<Integer> list) {
+    public void setList(LinkedList<Double> list) {
         this.list = list;
     }
 
@@ -32,18 +32,28 @@ public class ArithmeticCalculator {
         return str.toLowerCase().equals("exit");
     }
 
-    public Integer getInteger(Scanner sc) throws RuntimeException{
-        System.out.print("양의 정수을 입력해주세요:");
-        int a;
-        try {
-            a = sc.nextInt();
-            if (a < 0) {
-                throw new RuntimeException("양의 정수를 입력해주세요");
+    public Number getNumber(Scanner sc) throws RuntimeException {
+        System.out.print("양의 숫자를 입력해주세요:");
+        double d = -1;
+        int i = -1;
+        String line = sc.nextLine();
+        if (line.contains(".")) {
+            d = Double.parseDouble(line);
+            if (d < 0) {
+                throw new RuntimeException("양의 숫자를 입력해주세요");
             }
-        } finally {
-            sc.nextLine();
+        } else {
+            i = Integer.parseInt(line);
+            if (i < 0) {
+                throw new RuntimeException("양의 숫자를 입력해주세요");
+            }
         }
-        return a;
+
+        if (i != -1) {
+            return i;
+        } else {
+            return d;
+        }
     }
 
     public OperatorType getOperator(Scanner sc) throws RuntimeException {
@@ -65,9 +75,26 @@ public class ArithmeticCalculator {
         return null;
     }
 
-    public void calculate(OperatorType op, int a, int b) throws ArithmeticException{
-        int result = 0;
-        switch(op) {
+    public <A extends Number, B extends Number> void calFunc(OperatorType op, A a, B b) {
+        if (a instanceof Integer) {
+            if (b instanceof Integer) {
+                calculate(op, (int) a, (int) b);
+            } else {
+                calculate(op, (int) a, (double) b);
+            }
+        } else {
+            if (b instanceof Integer) {
+                calculate(op, (double) a, (int) b);
+            } else {
+                calculate(op, (double) a, (double) b);
+            }
+        }
+
+    }
+
+    private void calculate(OperatorType op, int a, double b) {
+        double result = 0;
+        switch (op) {
             case op.PLUS:
                 result = a + b;
                 break;
@@ -79,6 +106,75 @@ public class ArithmeticCalculator {
                 break;
             case op.DIVIDE:
                 result = a / b;
+                if (b == 0) {
+                    throw new ArithmeticException();
+                }
+                break;
+        }
+        list.add(result);
+    }
+
+    private void calculate(OperatorType op, int a, int b) {
+        double result = 0;
+        switch (op) {
+            case op.PLUS:
+                result = a + b;
+                break;
+            case op.MINUS:
+                result = a - b;
+                break;
+            case op.MULTIPLY:
+                result = a * b;
+                break;
+            case op.DIVIDE:
+                result = a / b;
+                if (b == 0) {
+                    throw new ArithmeticException();
+                }
+                break;
+        }
+        list.add(result);
+    }
+
+    private void calculate(OperatorType op, double a, int b) {
+        double result = 0;
+        switch (op) {
+            case op.PLUS:
+                result = a + b;
+                break;
+            case op.MINUS:
+                result = a - b;
+                break;
+            case op.MULTIPLY:
+                result = a * b;
+                break;
+            case op.DIVIDE:
+                result = a / b;
+                if (b == 0) {
+                    throw new ArithmeticException();
+                }
+                break;
+        }
+        list.add(result);
+    }
+
+    private void calculate(OperatorType op, double a, double b) {
+        double result = 0;
+        switch (op) {
+            case op.PLUS:
+                result = a + b;
+                break;
+            case op.MINUS:
+                result = a - b;
+                break;
+            case op.MULTIPLY:
+                result = a * b;
+                break;
+            case op.DIVIDE:
+                result = a / b;
+                if (b == 0) {
+                    throw new ArithmeticException();
+                }
                 break;
         }
         list.add(result);
