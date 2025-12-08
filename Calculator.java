@@ -4,13 +4,22 @@ import java.util.Scanner;
 public class Calculator {
     private ArrayList<Integer> list = new ArrayList<>();
 
+
+    public ArrayList<Integer> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Integer> list) {
+        this.list = list;
+    }
+
     public boolean continueFunction(Scanner sc) {
         System.out.print("중지하려면 exit를 입력해주세요:");
         String str = sc.nextLine();
         return str.toLowerCase().equals("exit");
     }
 
-    public Integer getInteger(Scanner sc) {
+    public Integer getInteger(Scanner sc) throws RuntimeException{
         System.out.print("양의 정수을 입력해주세요:");
         int a;
         try {
@@ -18,10 +27,7 @@ public class Calculator {
             if (a < 0) {
                 throw new RuntimeException("양의 정수를 입력해주세요");
             }
-        } catch (RuntimeException e) {
-            System.out.println("양의 정수를 입력해주세요");
-            return null;
-        }finally {
+        } finally {
             sc.nextLine();
         }
         return a;
@@ -36,8 +42,7 @@ public class Calculator {
         return op;
     }
 
-    public int getResult(char op, int a, int b) throws RuntimeException{
-        boolean errHappened = false;
+    public void calculate(char op, int a, int b) throws ArithmeticException{
         int result = 0;
         switch(op) {
             case '+' :
@@ -53,6 +58,6 @@ public class Calculator {
                 result = a / b;
                 break;
         }
-        return result;
+        list.add(result);
     }
 }
