@@ -34,6 +34,7 @@ public class App {
                 continue;
             }
             System.out.println(a + "" + op + b + "=" + calculator.getList().getLast());
+            calculator.removeFirstFunction(sc);
             boolean flag = calculator.continueFunction(sc);
             if (flag) {
                 break;

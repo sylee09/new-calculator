@@ -1,16 +1,30 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Calculator {
-    private ArrayList<Integer> list = new ArrayList<>();
+    private LinkedList<Integer> list = new LinkedList<>();
 
 
-    public ArrayList<Integer> getList() {
+    public LinkedList<Integer> getList() {
         return list;
     }
 
-    public void setList(ArrayList<Integer> list) {
+    public void setList(LinkedList<Integer> list) {
         this.list = list;
+    }
+
+    public void removeFirst() {
+        list.removeFirst();
+    }
+
+    public void removeFirstFunction(Scanner sc) {
+        System.out.println("현재 저장된 계산 결과들: " + list);
+        System.out.print("저장된 첫번째 결과를 제거하겠습니까[y/n]? ");
+        String line = sc.nextLine();
+        if (line.toLowerCase().equals("y")) {
+            removeFirst();
+            System.out.println("명령 결과: " + list);
+        }
     }
 
     public boolean continueFunction(Scanner sc) {
