@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ArithmeticCalculator {
@@ -178,5 +179,17 @@ public class ArithmeticCalculator {
                 break;
         }
         list.add(result);
+    }
+
+    public List<Double> getEqualAndGreaterThan(Scanner sc) {
+        System.out.print("저장된 값중 n이상 출력, n 입력: ");
+        double num;
+        try {
+            num = sc.nextDouble();
+        } finally {
+            sc.nextLine();
+        }
+        double finalNum = num;
+        return list.stream().filter(a -> a >= finalNum).toList();
     }
 }

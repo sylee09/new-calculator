@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -36,6 +37,12 @@ public class App {
             }
             System.out.println(n1 + "" + op.getSign() + n2 + "=" + calculator.getList().getLast());
             calculator.removeFirstFunction(sc);
+            try {
+                List<Double> result = calculator.getEqualAndGreaterThan(sc);
+                System.out.println(result);
+            } catch (RuntimeException e) {
+                System.out.println("숫자를 입력해 주세요");
+            }
             boolean flag = calculator.continueFunction(sc);
             if (flag) {
                 break;
