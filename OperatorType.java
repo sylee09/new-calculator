@@ -4,7 +4,7 @@ public enum OperatorType {
     MULTIPLY('*'),
     DIVIDE('/');
 
-    private char sign;
+    private final char sign;
 
     OperatorType(char sign) {
         this.sign = sign;
