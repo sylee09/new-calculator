@@ -17,6 +17,7 @@ public class ArithmeticCalculator {
         list.removeFirst();
     }
 
+    //저장된 원소중 첫번째 원소 삭제
     public void removeFirstFunction(Scanner sc) {
         System.out.println("현재 저장된 계산 결과들: " + list);
         System.out.print("저장된 첫번째 결과를 제거하겠습니까[y/n]? ");
@@ -27,12 +28,14 @@ public class ArithmeticCalculator {
         }
     }
 
+    //exit 입력하면 계산기 종료 함수
     public boolean continueFunction(Scanner sc) {
         System.out.print("중지하려면 exit를 입력해주세요:");
         String str = sc.nextLine();
         return str.toLowerCase().equals("exit");
     }
 
+    //사용자가 숫자를 입력하면 정수/실수 판단하여 그에 해당하는 타입으로 변환 및 반환
     public Number getNumber(Scanner sc) throws RuntimeException {
         System.out.print("양의 숫자를 입력해주세요:");
         double d = -1;
@@ -57,6 +60,7 @@ public class ArithmeticCalculator {
         }
     }
 
+    //사용자에게 입력받은 문자에 맞는 OperatorType 반환하는 함수
     public OperatorType getOperator(Scanner sc) throws RuntimeException {
         System.out.print("사칙연산 기호('+', '-', '*', '/')를 입력해주세요:");
         char op = sc.nextLine().charAt(0);
@@ -76,6 +80,7 @@ public class ArithmeticCalculator {
         return null;
     }
 
+    //타입에 맞는 calculate 하도록 도와주는 함수
     public <A extends Number, B extends Number> void calFunc(OperatorType op, A a, B b) {
         if (a instanceof Integer) {
             if (b instanceof Integer) {
@@ -93,6 +98,7 @@ public class ArithmeticCalculator {
 
     }
 
+    //계산함수 (int, double)
     private void calculate(OperatorType op, int a, double b) {
         double result = 0;
         switch (op) {
@@ -115,6 +121,7 @@ public class ArithmeticCalculator {
         list.add(result);
     }
 
+    //계산함수 (int, int)
     private void calculate(OperatorType op, int a, int b) {
         double result = 0;
         switch (op) {
@@ -137,6 +144,7 @@ public class ArithmeticCalculator {
         list.add(result);
     }
 
+    // 계산함수 (double, int)
     private void calculate(OperatorType op, double a, int b) {
         double result = 0;
         switch (op) {
@@ -158,7 +166,7 @@ public class ArithmeticCalculator {
         }
         list.add(result);
     }
-
+    // 계산함수 (double, double)
     private void calculate(OperatorType op, double a, double b) {
         double result = 0;
         switch (op) {
@@ -181,6 +189,7 @@ public class ArithmeticCalculator {
         list.add(result);
     }
 
+    // 사용자가 입력한 정수보다 크거나 같은 값들을 list로 만든뒤 반환
     public List<Double> getEqualAndGreaterThan(Scanner sc) {
         System.out.print("저장된 값중 n이상 출력, n 입력: ");
         double num;
